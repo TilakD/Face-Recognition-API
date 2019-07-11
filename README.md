@@ -1,5 +1,5 @@
 # Face_Recognition
-
+Face Recognition flask app for webcam feed with tensorflow served triplet loss based DL model.
 
 ## Tensorflow serving commands
 ```
