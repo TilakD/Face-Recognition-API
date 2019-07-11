@@ -1,6 +1,8 @@
 # Face_Recognition
 Face Recognition flask app for webcam feed with tensorflow served triplet loss based DL model.
 
+Further details in [here](https://github.com/TilakD/Face-Recognition-API/blob/master/Face%20Recognition%20app.pdf)
+
 ## Tensorflow serving commands
 ```
 tensorflow_model_server --port=9001 --model_name=frlab --model_base_path=/home/dtilak/fr
