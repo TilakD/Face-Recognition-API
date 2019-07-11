@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="face, recognition, identify" name="keywords">
+<meta content="Identify the Face" name="description">
+<meta content="Face Recognition" name="title">
+<title>Face Recognition</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+</head>
+  
+<body>
+<form>
+<div id="container">
+    <video width="640" height="480" autoplay="true" id="videoElement">
+     
+    </video>
+
+<canvas id="canvas" width="640" height="480"></canvas>
+</div>
+
+<div>
+<input type="button" id="capture" value="Snap Photo"></input>
+<br>
+<h3 id="result"></h3>
+</div>
+<script>
+ var video = document.querySelector("#videoElement");
+ 
+if (navigator.mediaDevices.getUserMedia) {       
+    navigator.mediaDevices.getUserMedia({video: true})
+  .then(function(stream) {
+    video.srcObject = stream;
+  })
+  .catch(function(error) {
+    console.log("Something went wrong!");
+  });
+}
+
+// Elements for taking the snapshot
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.getElementById('videoElement');
+
+        
+document.getElementById('capture').addEventListener('click', function() {
+	context.drawImage(video, 0, 0, 400, 300);
+	document.getElementById('result').innerHTML = "Recognising the face...";
+	var img = canvas.toDataURL("image/png");
+	$.ajax({
+		type: "POST",
+		url: "https://ip_address/api",
+		crossDomain : true,
+		data: img
+		}).done(function(msg) {
+		document.getElementById('result').innerHTML = msg;
+	});
+
+});
+
+</script>
+</form>
+</body>
+</html>
